@@ -6,9 +6,13 @@
     "stylelint-config-prettier",
     "stylelint-config-rational-order"
   ],
-  "plugins": ["stylelint-order", "stylelint-config-rational-order/plugin"],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-config-rational-order/plugin"
+  ],
   "rules": {
     "order/properties-order": [],
+    "selector-class-pattern": null,
     "plugin/rational-order": [
       true,
       {
