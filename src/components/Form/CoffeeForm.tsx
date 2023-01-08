@@ -55,7 +55,7 @@ const CoffeeForm: React.FC = () => {
         autoClose: 5000,
         isLoading: false,
       })
-    } else {
+    } else if (transactionReceipt?.status === 'RECEIVED') {
       toastId.current = toast.loading('Transaction is loading...')
     }
   }, [transactionReceipt])
