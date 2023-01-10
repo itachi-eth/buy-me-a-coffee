@@ -14,7 +14,7 @@ const useBuyMeCoffee = (name: string, messages: string, amount: string) => {
 
   const calls = useMemo(() => {
     const tx = {
-      contractAddress: addresses.buyMeCoffee,
+      contractAddress: addresses.buyMeACoffee,
       entrypoint: 'buy_me_a_coffee',
       calldata,
     }

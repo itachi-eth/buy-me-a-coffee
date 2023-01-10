@@ -10,13 +10,17 @@ const useApprove = () => {
     const tx = {
       contractAddress: addresses.eth,
       entrypoint: 'approve',
-      calldata: [addresses.buyMeCoffee, amount.low, amount.high],
+      calldata: [addresses.buyMeACoffee, amount.low, amount.high],
     }
     return tx
   }, [amount])
 
-  const { execute: onApprove, error } = useStarknetExecute({ calls })
-  return { onApprove, error }
+  const {
+    execute: onApprove,
+    error,
+    loading: approveLoading,
+  } = useStarknetExecute({ calls })
+  return { onApprove, error, approveLoading }
 }
 
 export default useApprove

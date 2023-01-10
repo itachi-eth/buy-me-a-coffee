@@ -12,9 +12,9 @@ const useAllowance = () => {
   const { data, loading } = useStarknetCall({
     contract: ethContract,
     method: 'allowance',
-    args: [address, addresses.buyMeCoffee],
+    args: [address, addresses.buyMeACoffee],
     options: {
-      watch: false,
+      watch: true,
     },
   })
   const remaining = data && uint256.uint256ToBN(data[0])

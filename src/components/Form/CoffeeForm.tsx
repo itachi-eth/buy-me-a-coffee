@@ -25,8 +25,7 @@ const CoffeeForm: React.FC = () => {
   const [events, setEvents] = useState<any>()
   const isApproved = useAllowance()
   const toastId = useRef<number | string>(0)
-  const { onApprove } = useApprove()
-
+  const { onApprove, approveLoading } = useApprove()
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPrice((event.target as HTMLInputElement).value)
   }
@@ -59,6 +58,19 @@ const CoffeeForm: React.FC = () => {
       toastId.current = toast.loading('Transaction is loading...')
     }
   }, [transactionReceipt])
+
+  useEffect(() => {
+    if (approveLoading) {
+      toastId.current = toast.loading('Approving the contract...')
+    } else {
+      toast.update(toastId.current, {
+        render: 'Contract is approved',
+        type: 'success',
+        autoClose: 5000,
+        isLoading: false,
+      })
+    }
+  }, [approveLoading, isApproved])
 
   const submitForm = () => {
     buyMeCoffee()

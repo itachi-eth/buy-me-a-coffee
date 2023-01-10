@@ -1,86 +1,35 @@
-# Next.js With Material UI Example Template
+# Build the frontend Buy Me A Coffee website dapp
 
-This example template was scaffolded using [nextjs-with-typescript-example-template](https://github.com/binodnepali/nextjs-with-typescript-example-template).
+For this website portion, in order to keep things simple and clean, we are going to use Next.js to build the website.
 
-## Before getting started
+### Prerequisites:
+To run the website locally, you need to have:
+- yarn (recommended) or node
+- node (version >=12.22.0)
 
-Make sure you have installed [Node.js 12.22.0 or higher](https://nodejs.org/en/) on your machine. You can use [nvm](https://github.com/nvm-sh/nvm) to manage multiple node version on your machine.
-
-## Getting started
-
-You can setup this project using npm or yarn package managers.
-
-> I would recommend to installed or enabled [yarn](https://yarnpkg.com/getting-started) 1.22.15 or higher on your machine.
-
-### Clone repo
-
-```bash
-git clone https://github.com/binodnepali/nextjs-with-material-ui-example-template.git
-#or
-git clone git@github.com:binodnepali/nextjs-with-material-ui-example-template.git
+### Clone the repo:
 ```
-
-### Navigate to cloned repo
-
-```bash
-cd nextjs-with-material-ui-example-template
+git clone https://github.com/itachi-eth/buy-me-a-coffee.git
 ```
+Here are the changes we need to make before running the code locally:
 
-### Install dependencies
+- Update the buyMeACoffee in config/constants/index.ts
 
-```bash
+### Run the code locally
+```
 yarn install
-#or
-npm install
-```
+yarn run dev
+``` 
+Now let's take a tour through the website and the code. You can see the (website)[http://localhost:3000] that when you first visit the dapp. The first time you visit, you will not be connected, so a button will appear asking you to Connect your wallet.
 
-### Start development server
+After you click Connect your wallet, a dialog window will pop up asking which wallet you want to connect (argentx/braavos).
 
-```bash
-yarn dev
-#or
-npm run dev
-```
+Once you approve the connection the website will acknowledge your connection and you will be able to fill in the coffee form.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The first time user needs to approve the contract before submitting the coffee form. Once the user approve the contract, there is no need to approve it at the next time. Then you will be able to sumbit your name and messages. 
 
-### Build for production
+Once the transaction has been approved, you will get the final receipts.
 
-```bash
-yarn build
-#or
-npm run build
-```
+### Ending
 
-### Start preview server after build
-
-```bash
-yarn start
-#or
-npm run start
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-### Run release
-
-Follow the [Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/) in your repository. And when you're ready to release, run below scripts.
-
-```bash
-yarn release
-#or
-npm run release
-```
-
-## Learn More
-
-To learn more about Next.js, ESLint, Prettier, StyleLint and lint-staged, take a look at the following resources:
-
-* [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API
-* [Next.js ESLint](https://nextjs.org/docs/basic-features/eslint) - Learn about how to Next.js ESLint setup
-* [Prettier Setup](https://prettier.io/docs/en/install.html) - Learn about how to setup prettier
-* [Prettier Integrations](https://prettier.io/docs/en/related-projects.html) - Learn about how to setup prettier with other tools
-* [ESLint Setup](https://eslint.org/docs/user-guide/getting-started) - Learn about how to ESLint
-* [StyleLint Setup](https://stylelint.io/user-guide/get-started) - Learn about how to setup StyleLint
-* [Lint Staged Setup](https://github.com/okonet/lint-staged) - Learn about how to setup lint-staged
-* [Standard Version](https://github.com/conventional-changelog/standard-version) - Learn about how to setup standar version
+BOOM! That's it! That's the whole project. Take a second to pat yourself on the back and reflect on the journey you've been on :relaxed: 
