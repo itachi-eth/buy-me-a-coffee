@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import CoffeeForm from '../components/Form/CoffeeForm'
-import { Box, List, ListItemText, Grid } from '@mui/material'
+import { Box, List, ListItemText, Grid, CircularProgress } from '@mui/material'
 import { useEvents } from '../contexts/Events/hooks'
 
 export default function HomePage() {
@@ -42,8 +42,15 @@ export default function HomePage() {
             alignItems="start"
             justifyContent="center"
           >
-            <Box>
-              {eventsQuery?.isFetched && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: 'auto',
+              }}
+            >
+              {eventsQuery?.isFetched ? (
                 <div>
                   <h2>Messages:</h2>
                   <List sx={{ height: '700px', overflowY: 'scroll' }}>
@@ -69,6 +76,8 @@ export default function HomePage() {
                     ))}
                   </List>
                 </div>
+              ) : (
+                <CircularProgress size={50} />
               )}
             </Box>
           </Grid>

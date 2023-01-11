@@ -14,6 +14,7 @@ type Message = {
 
 interface IEventsContext {
   events: Message[] | undefined
+  onSetEvents: (events: Message[] | undefined) => void // eslint-disable-line no-unused-vars
   eventsQuery?: UseQueryResult<Message[] | null, unknown>
 }
 
@@ -21,6 +22,7 @@ export const EventsContext = createContext<IEventsContext>({} as IEventsContext)
 
 export const EventsProvider: React.FC<Props> = ({ children }) => {
   const [events, setEvents] = React.useState<Message[] | undefined>()
+  const onSetEvents = (events: Message[] | undefined) => setEvents(events)
   const eventsQuery = useQuery(
     'getEvents',
     () =>
@@ -46,6 +48,7 @@ export const EventsProvider: React.FC<Props> = ({ children }) => {
     <EventsContext.Provider
       value={{
         events,
+        onSetEvents,
         eventsQuery,
       }}
     >

@@ -18,9 +18,11 @@ import useAllowance from '../../hooks/useAllowance'
 import useApprove from '../../hooks/useApprove'
 import { toast } from 'react-toastify'
 import { getReceipt } from '../../utils/helpers'
+import { useEvents } from '../../contexts/Events/hooks'
 
 const CoffeeForm: React.FC = () => {
   const { address, status } = useAccount()
+  const { events: allEvents, onSetEvents } = useEvents()
   const [selectedPrice, setSelectedPrice] = React.useState<string>('0.001')
   const [events, setEvents] = useState<any>()
   const isApproved = useAllowance()
@@ -58,10 +60,26 @@ const CoffeeForm: React.FC = () => {
         autoClose: 5000,
         isLoading: false,
       })
+      address &&
+        allEvents?.unshift({
+          name,
+          messages,
+          account: address,
+        })
+      onSetEvents(allEvents)
+      reset()
     } else if (transactionReceipt?.status === 'RECEIVED') {
       toastId.current = toast.loading('Transaction is loading...')
     }
-  }, [transactionReceipt])
+  }, [
+    transactionReceipt,
+    address,
+    allEvents,
+    messages,
+    name,
+    onSetEvents,
+    reset,
+  ])
 
   useEffect(() => {
     if (approveReceipt?.status === 'RECEIVED') {
@@ -78,7 +96,6 @@ const CoffeeForm: React.FC = () => {
 
   const submitForm = () => {
     buyMeCoffee()
-    reset()
   }
 
   const disabledSubmitButton = !(
