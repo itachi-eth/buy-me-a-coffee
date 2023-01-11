@@ -51,7 +51,9 @@ export default async function handler(
     res.status(500).json({ error: 'Unable to fetch events api' })
 
   const response = eventsData as EventResponse
-  const eventIds = response.items.map((item) => item.id)
+  const eventIds = response.items
+    .sort((a: EventItem, b: EventItem) => b.block_number - a.block_number)
+    .map((item) => item.id)
 
   const messages = await Promise.all(
     eventIds.map(async (id) => {
