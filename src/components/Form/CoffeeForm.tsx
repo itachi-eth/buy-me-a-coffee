@@ -25,7 +25,7 @@ const CoffeeForm: React.FC = () => {
   const [events, setEvents] = useState<any>()
   const isApproved = useAllowance()
   const toastId = useRef<number | string>(0)
-  const { onApprove, approveLoading } = useApprove()
+  const { onApprove, approveData } = useApprove()
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPrice((event.target as HTMLInputElement).value)
   }
@@ -41,6 +41,10 @@ const CoffeeForm: React.FC = () => {
   )
   const { data: transactionReceipt } = useTransactionReceipt({
     hash: buyMeCoffeeData?.transaction_hash,
+    watch: true,
+  })
+  const { data: approveReceipt } = useTransactionReceipt({
+    hash: approveData?.transaction_hash,
     watch: true,
   })
 
@@ -60,9 +64,9 @@ const CoffeeForm: React.FC = () => {
   }, [transactionReceipt])
 
   useEffect(() => {
-    if (approveLoading) {
+    if (approveReceipt?.status === 'RECEIVED') {
       toastId.current = toast.loading('Approving the contract...')
-    } else {
+    } else if (approveReceipt?.status === 'ACCEPTED_ON_L2') {
       toast.update(toastId.current, {
         render: 'Contract is approved',
         type: 'success',
@@ -70,12 +74,18 @@ const CoffeeForm: React.FC = () => {
         isLoading: false,
       })
     }
-  }, [approveLoading, isApproved])
+  }, [approveReceipt])
 
   const submitForm = () => {
     buyMeCoffee()
     reset()
   }
+
+  const disabledSubmitButton = !(
+    isApproved ||
+    approveReceipt?.status === 'ACCEPTED_ON_L2' ||
+    approveReceipt?.status === 'ACCEPTED_ON_L1'
+  )
 
   return (
     <Box
@@ -193,12 +203,18 @@ const CoffeeForm: React.FC = () => {
             <Button
               variant="contained"
               sx={{ marginRight: '10px' }}
-              disabled={isApproved}
+              disabled={
+                isApproved || approveReceipt?.status === 'ACCEPTED_ON_L2'
+              }
               onClick={() => onApprove()}
             >
               Approve
             </Button>
-            <Button type="submit" variant="contained" disabled={!isApproved}>
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={disabledSubmitButton}
+            >
               Submit
             </Button>
           </Stack>

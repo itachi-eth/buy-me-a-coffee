@@ -16,11 +16,12 @@ const useApprove = () => {
   }, [amount])
 
   const {
+    data: approveData,
     execute: onApprove,
     error,
     loading: approveLoading,
   } = useStarknetExecute({ calls })
-  return { onApprove, error, approveLoading }
+  return { approveData, onApprove, error, approveLoading }
 }
 
 export default useApprove
