@@ -1,5 +1,6 @@
 import { number, shortString, uint256 } from 'starknet'
 import BigNumber from 'bignumber.js'
+import axios from 'axios'
 
 export const stringToFelt = (inputString: string) => {
   let decimal: string = ''
@@ -14,6 +15,12 @@ export const feltToString = (inputString: string) => {
   const hex = number.toHex(bigNumber)
   const text = shortString.decodeShortString(hex)
   return text
+}
+
+export const feltToHex = (inputString: string) => {
+  const bigNumber = number.toBN(inputString)
+  const hex = number.toHex(bigNumber)
+  return hex
 }
 
 export const getTokenAmount = (balance: BigNumber, decimals = 18) => {
@@ -55,3 +62,13 @@ export const getReceipt = (events: any) => {
     }
   }
 }
+
+export const apiVoyagerClient = axios.create({
+  baseURL: 'https://goerli-2.voyager.online/api',
+  timeout: 10000,
+  headers: {
+    accept: 'application/json',
+    'Content-type': 'application/json',
+    'Cache-Control': 'no-cache',
+  },
+})

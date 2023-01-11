@@ -3,5 +3,4 @@ const addresses = {
   buyMeACoffee:
     '0x05fc624ccf5310e4c58f685b2ac83b81a844aec3efb8e29e372060b4cced665d',
 }
-
 export default addresses

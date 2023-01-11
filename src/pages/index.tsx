@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import CoffeeForm from '../components/Form/CoffeeForm'
-import { Box } from '@mui/material'
+import { Box, List, ListItemText, Grid } from '@mui/material'
+import { useEvents } from '../contexts/Events/hooks'
 
 export default function HomePage() {
+  const { events, eventsQuery } = useEvents()
   return (
     <div className={styles.container}>
       <Head>
@@ -13,15 +15,64 @@ export default function HomePage() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Buy Me A Coffee ☕️</h1>
-        <Box
-          sx={{
-            marginTop: '20px',
-            width: { lg: '30%', md: '50%', sm: '80%', xs: '100%' },
-          }}
-        >
-          <CoffeeForm />
-        </Box>
+        <Grid container>
+          <Grid
+            container
+            item
+            md={6}
+            alignItems="start"
+            justifyContent="center"
+          >
+            <Box>
+              <h1 className={styles.title}>Buy Me A Coffee ☕️</h1>
+              <Box
+                sx={{
+                  marginTop: '20px',
+                  width: '100%',
+                }}
+              >
+                <CoffeeForm />
+              </Box>
+            </Box>
+          </Grid>
+          <Grid
+            container
+            item
+            md={6}
+            alignItems="start"
+            justifyContent="center"
+          >
+            <Box>
+              {eventsQuery?.isFetched && (
+                <div>
+                  <h2>Messages:</h2>
+                  <List sx={{ height: '700px', overflowY: 'scroll' }}>
+                    {events?.map((item, index) => (
+                      <Box
+                        key={index}
+                        sx={{
+                          margin: '10px 0',
+                          border: '1px solid #000',
+                          padding: '5px',
+                          borderRadius: '10px',
+                        }}
+                      >
+                        <ListItemText>
+                          Accounts:{' '}
+                          {`${item.account.slice(0, 6)}...${item.account.slice(
+                            -4,
+                          )}`}
+                        </ListItemText>
+                        <ListItemText>Name: {item.name}</ListItemText>
+                        <ListItemText>Msgs: {item.messages}</ListItemText>
+                      </Box>
+                    ))}
+                  </List>
+                </div>
+              )}
+            </Box>
+          </Grid>
+        </Grid>
       </main>
     </div>
   )
