@@ -1,6 +1,23 @@
 # Build the frontend Buy Me A Coffee website dapp
 
-For this website portion, in order to keep things simple and clean, we are going to use Next.js to build the website.
+For this website portion, in order to keep things simple and clean, we are going to use an amazing tool for spinning up demo projects quickly, called Replit IDE.
+
+Visit my example project here, and fork it to create your own copy to modify:
+https://replit.com/@thatguyintech/BuyMeACoffee-Solidity-DeFi-Tipping-app
+
+![](https://i.imgur.com/xFg5vWh.png)
+
+You can also view the full website code here:
+https://github.com/itachi-eth/buy-me-a-coffee
+
+After forking the repl, you should be taken to an IDE page where you can:
+
+- See the code of a Next.js web application built with typescript
+- Get access to a console, a terminal shell, and a preview of the README.md file
+- View a hot-reloading version of your dapp
+
+It should look like this:
+
 
 ### Prerequisites:
 To run the website locally, you need to have:
